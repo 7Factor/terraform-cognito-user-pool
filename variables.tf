@@ -8,6 +8,12 @@ variable "allow_admin_create_user_only" {
   description = "Boolean value for whether you only want admins to be able to create users."
 }
 
+variable "username_attributes" {
+  type = list(string)
+  default = []
+  description = "Needs to specify one of [email || phone_numeber]."
+}
+
 // password policy
 variable "password_minimm_length" {
   default     = 6

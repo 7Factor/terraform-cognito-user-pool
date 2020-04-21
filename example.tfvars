@@ -1,7 +1,5 @@
 pool_name = "test-pool1"
-username_attributes = ["username"]
-// alias attributes needs to be one of phone_number, email, preferred_username.
-alias_attributes             = ["preferred_username"]
+username_attributes = ["email"]
 allow_admin_create_user_only = "true"
 
 pool_client_name    = "Test_app_1"
