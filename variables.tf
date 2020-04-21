@@ -3,22 +3,9 @@ variable "pool_name" {
   description = "The name of your cognito pool."
 }
 
-variable "alias_attributes" {
-  type        = list
-  default     = []
-  description = "A list of alias attributes for your cognito pool."
-}
-
 variable "allow_admin_create_user_only" {
   default     = false
   description = "Boolean value for whether you only want admins to be able to create users."
-}
-
-// schema attributes
-variable "schema_attributes" {
-  type        = list
-  default     = []
-  description = "A list of maps that configures your schema attributes. Please look to the terraform docs for more info."
 }
 
 // password policy
@@ -53,7 +40,7 @@ variable "pool_client_name" {
 }
 
 variable "explicit_auth_flows" {
-  type        = list
+  type        = list(string)
   default     = []
   description = "A list of any auth flows for the user pool client."
 }
@@ -64,13 +51,13 @@ variable "refresh_token_validity" {
 }
 
 variable "read_attributes" {
-  type        = list
+  type        = list(string)
   default     = []
   description = "A list of read attributes for your user pool client."
 }
 
 variable "write_attributes" {
-  type        = list
+  type        = list(string)
   default     = []
   description = "A list of write attributes for your user pool client."
 }
