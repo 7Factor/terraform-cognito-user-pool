@@ -20,6 +20,11 @@ resource "aws_cognito_user_pool" "main_pool" {
   admin_create_user_config {
     allow_admin_create_user_only = var.allow_admin_create_user_only
   }
+
+  # this guards against accidental deletion of user data until a way to restore backup is found
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_cognito_user_pool_client" "main_client" {
