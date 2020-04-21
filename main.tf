@@ -4,8 +4,15 @@ terraform {
 
 data "aws_region" "current" {}
 
+variable "username_attributes" {
+  type = list(string)
+  default = []
+  description = "A list specifying whether email addresses or phone numbers can be specified as usernames when a a user signs up."
+}
 resource "aws_cognito_user_pool" "main_pool" {
   name = var.pool_name
+
+  username_attributes = var.username_attributes
 
   password_policy {
     minimum_length    = var.password_minimm_length
