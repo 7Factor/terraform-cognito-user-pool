@@ -9,8 +9,8 @@ variable "allow_admin_create_user_only" {
 }
 
 variable "username_attributes" {
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
   description = "Needs to specify one of [email || phone_numeber]."
 }
 

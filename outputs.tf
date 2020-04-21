@@ -1,7 +1,3 @@
-output "user_pool_attributes" {
-  value = aws_cognito_user_pool.main_pool.*.schema
-}
-
 output "pool_id" {
   value = aws_cognito_user_pool.main_pool.id
 }

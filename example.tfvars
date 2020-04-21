@@ -1,5 +1,5 @@
-pool_name = "test-pool1"
-username_attributes = ["email"]
+pool_name                    = "test-pool1"
+username_attributes          = ["email"]
 allow_admin_create_user_only = "true"
 
 pool_client_name    = "Test_app_1"
