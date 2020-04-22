@@ -21,6 +21,12 @@ resource "aws_cognito_user_pool" "main_pool" {
     allow_admin_create_user_only = var.allow_admin_create_user_only
   }
 
+  schema {
+    attribute_data_type = "String"
+    name                = "email"
+    required            = true
+  }
+
   # this guards against accidental deletion of user data until a way to restore backup is found
   lifecycle {
     prevent_destroy = true
