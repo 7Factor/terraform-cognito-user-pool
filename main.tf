@@ -7,15 +7,15 @@ data "aws_region" "current" {}
 resource "aws_cognito_user_pool" "main_pool" {
   name = var.pool_name
 
-  username_attributes = var.username_attributes
+  username_attributes        = var.username_attributes
   sms_authentication_message = var.sms_authentication_message
 
   password_policy {
-    minimum_length    = var.password_minimm_length
-    require_lowercase = var.password_require_lowercase
-    require_uppercase = var.password_require_uppercase
-    require_numbers   = var.password_require_numbers
-    require_symbols   = var.password_require_symbols
+    minimum_length                   = var.password_minimm_length
+    require_lowercase                = var.password_require_lowercase
+    require_uppercase                = var.password_require_uppercase
+    require_numbers                  = var.password_require_numbers
+    require_symbols                  = var.password_require_symbols
     temporary_password_validity_days = var.temporary_password_validity_days
   }
 
@@ -25,7 +25,7 @@ resource "aws_cognito_user_pool" "main_pool" {
     invite_message_template {
       email_message = var.invite_email_message
       email_subject = var.invite_email_subject
-      sms_message = var.invite_sms_message
+      sms_message   = var.invite_sms_message
     }
   }
 
@@ -33,11 +33,14 @@ resource "aws_cognito_user_pool" "main_pool" {
     attribute_data_type = "String"
     name                = "email"
     required            = true
-    mutable = var.schema_mutable
+    mutable             = var.schema_mutable
 
-    string_attribute_constraints {
-      max_length = var.schema_string_max_length
-      min_length = var.schema_string_min_length
+    dynamic "string_attribute_constraints" {
+      for_each = var.string_attribute_constraints
+      content {
+        max_length = string_attribute_constraints.value["schema_string_max_length"]
+        min_length = string_attribute_constraints.value["schema_string_min_length"]
+      }
     }
   }
 

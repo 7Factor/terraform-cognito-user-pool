@@ -69,58 +69,66 @@ variable "write_attributes" {
 }
 
 variable "sms_authentication_message" {
-  type = string
-  nullable = true
-  default = null
+  type        = string
+  nullable    = true
+  default     = null
   description = "String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code."
 }
 
 variable "temporary_password_validity_days" {
-  type = number
-  nullable = true
-  default = null
+  type        = number
+  nullable    = true
+  default     = null
   description = "the number of days a temporary password is valid."
 }
 
 variable "schema_mutable" {
-  type = bool
-  nullable = true
-  default = null
+  type        = bool
+  nullable    = true
+  default     = null
   description = "Whether the attribute can be changed once it has been created."
 }
 
 variable "schema_string_max_length" {
-  type = number
-  nullable = true
-  default = null
+  type        = number
+  nullable    = true
+  default     = null
   description = "Maximum length of an attribute value of the string type."
 }
 
 variable "schema_string_min_length" {
-  type = number
-  nullable = true
-  default = null
+  type        = number
+  nullable    = true
+  default     = null
   description = "Minimum length of an attribute value of the string type."
 }
 
+variable "string_attribute_constraints" {
+  type = list(object({
+    schema_string_max_length = string
+    schema_string_min_length = string
+  }))
+  default  = []
+}
+
 variable "invite_email_message" {
-  type = string
-  nullable = true
-  default = null
+  type        = string
+  nullable    = true
+  default     = null
   description = "Message template for email messages. Must contain {username} and {####} placeholders, for username and temporary password, respectively."
 }
 
 variable "invite_email_subject" {
-  type = string
-  nullable = true
-  default = null
+  type        = string
+  nullable    = true
+  default     = null
   description = "Subject line for email messages."
 }
 
 variable "invite_sms_message" {
-  type = string
-  nullable = true
-  default = null
+  type        = string
+  nullable    = true
+  default     = null
   description = "Message template for SMS messages. Must contain {username} and {####} placeholders, for username and temporary password, respectively."
 }
 
