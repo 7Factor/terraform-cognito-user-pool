@@ -22,10 +22,13 @@ resource "aws_cognito_user_pool" "main_pool" {
   admin_create_user_config {
     allow_admin_create_user_only = var.allow_admin_create_user_only
 
-    invite_message_template {
-      email_message = var.invite_email_message
-      email_subject = var.invite_email_subject
-      sms_message   = var.invite_sms_message
+    dynamic "invite_message_template" {
+      for_each = var.invite_message_template
+      content {
+        email_message = invite_message_template.value["email_message"]
+        email_subject = invite_message_template.value["email_subject"]
+        sms_message   = invite_message_template.value["sms_message"]
+      }
     }
   }
 

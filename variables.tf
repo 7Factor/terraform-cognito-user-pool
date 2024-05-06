@@ -89,46 +89,19 @@ variable "schema_mutable" {
   description = "Whether the attribute can be changed once it has been created."
 }
 
-variable "schema_string_max_length" {
-  type        = number
-  nullable    = true
-  default     = null
-  description = "Maximum length of an attribute value of the string type."
-}
-
-variable "schema_string_min_length" {
-  type        = number
-  nullable    = true
-  default     = null
-  description = "Minimum length of an attribute value of the string type."
-}
-
 variable "string_attribute_constraints" {
   type = list(object({
     schema_string_max_length = string
     schema_string_min_length = string
   }))
-  default  = []
+  default = []
 }
 
-variable "invite_email_message" {
-  type        = string
-  nullable    = true
-  default     = null
-  description = "Message template for email messages. Must contain {username} and {####} placeholders, for username and temporary password, respectively."
+variable "invite_message_template" {
+  type = list(object({
+    email_message = string
+    email_subject = string
+    sms_message   = string
+  }))
+  default = []
 }
-
-variable "invite_email_subject" {
-  type        = string
-  nullable    = true
-  default     = null
-  description = "Subject line for email messages."
-}
-
-variable "invite_sms_message" {
-  type        = string
-  nullable    = true
-  default     = null
-  description = "Message template for SMS messages. Must contain {username} and {####} placeholders, for username and temporary password, respectively."
-}
-
