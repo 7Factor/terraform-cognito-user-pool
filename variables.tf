@@ -70,6 +70,7 @@ variable "write_attributes" {
 
 variable "sms_authentication_message" {
   type = string
+  nullable = true
   description = "String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code."
-  default = ""
+  default = null
 }
