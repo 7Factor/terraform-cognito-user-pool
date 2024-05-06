@@ -16,16 +16,29 @@ resource "aws_cognito_user_pool" "main_pool" {
     require_uppercase = var.password_require_uppercase
     require_numbers   = var.password_require_numbers
     require_symbols   = var.password_require_symbols
+    temporary_password_validity_days = var.temporary_password_validity_days
   }
 
   admin_create_user_config {
     allow_admin_create_user_only = var.allow_admin_create_user_only
+
+    invite_message_template {
+      email_message = var.invite_email_message
+      email_subject = var.invite_email_subject
+      sms_message = var.invite_sms_message
+    }
   }
 
   schema {
     attribute_data_type = "String"
     name                = "email"
     required            = true
+    mutable = var.schema_mutable
+
+    string_attribute_constraints {
+      max_length = var.schema_string_max_length
+      min_length = var.schema_string_min_length
+    }
   }
 
   # this guards against accidental deletion of user data until a way to restore backup is found
