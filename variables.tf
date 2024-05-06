@@ -67,3 +67,9 @@ variable "write_attributes" {
   default     = []
   description = "A list of write attributes for your user pool client."
 }
+
+variable "sms_authentication_message" {
+  type = string
+  description = "String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code."
+  default = ""
+}

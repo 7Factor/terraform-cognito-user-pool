@@ -8,6 +8,7 @@ resource "aws_cognito_user_pool" "main_pool" {
   name = var.pool_name
 
   username_attributes = var.username_attributes
+  sms_authentication_message = var.sms_authentication_message
 
   password_policy {
     minimum_length    = var.password_minimm_length
