@@ -91,13 +91,15 @@ variable "schema_mutable" {
 
 variable "schema_string_max_length" {
   type = number
-  default = 2048
+  nullable = true
+  default = null
   description = "Maximum length of an attribute value of the string type."
 }
 
 variable "schema_string_min_length" {
   type = number
-  default = 0
+  nullable = true
+  default = null
   description = "Minimum length of an attribute value of the string type."
 }
 
