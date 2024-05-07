@@ -7,24 +7,41 @@ data "aws_region" "current" {}
 resource "aws_cognito_user_pool" "main_pool" {
   name = var.pool_name
 
-  username_attributes = var.username_attributes
+  username_attributes        = var.username_attributes
+  sms_authentication_message = var.sms_authentication_message
 
   password_policy {
-    minimum_length    = var.password_minimm_length
-    require_lowercase = var.password_require_lowercase
-    require_uppercase = var.password_require_uppercase
-    require_numbers   = var.password_require_numbers
-    require_symbols   = var.password_require_symbols
+    minimum_length                   = var.password_minimm_length
+    require_lowercase                = var.password_require_lowercase
+    require_uppercase                = var.password_require_uppercase
+    require_numbers                  = var.password_require_numbers
+    require_symbols                  = var.password_require_symbols
+    temporary_password_validity_days = var.temporary_password_validity_days
   }
 
   admin_create_user_config {
     allow_admin_create_user_only = var.allow_admin_create_user_only
+
+    dynamic "invite_message_template" {
+      for_each = var.invite_message_template == null ? [] : [1]
+      content {
+        email_message = var.invite_message_template.email_message
+        email_subject = var.invite_message_template.email_subject
+        sms_message   = var.invite_message_template.sms_message
+      }
+    }
   }
 
   schema {
     attribute_data_type = "String"
     name                = "email"
     required            = true
+    mutable             = var.schema_mutable
+
+    string_attribute_constraints {
+      max_length = var.string_attribute_constraints.schema_string_max_length
+      min_length = var.string_attribute_constraints.schema_string_min_length
+    }
   }
 
   # this guards against accidental deletion of user data until a way to restore backup is found

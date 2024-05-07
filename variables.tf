@@ -67,3 +67,45 @@ variable "write_attributes" {
   default     = []
   description = "A list of write attributes for your user pool client."
 }
+
+variable "sms_authentication_message" {
+  type        = string
+  nullable    = true
+  default     = null
+  description = "String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code."
+}
+
+variable "temporary_password_validity_days" {
+  type        = number
+  nullable    = true
+  default     = null
+  description = "the number of days a temporary password is valid."
+}
+
+variable "schema_mutable" {
+  type        = bool
+  nullable    = true
+  default     = null
+  description = "Whether the attribute can be changed once it has been created."
+}
+
+variable "string_attribute_constraints" {
+  type = object({
+    schema_string_max_length = optional(string)
+    schema_string_min_length = optional(string)
+  })
+  default = {
+    schema_string_max_length = null
+    schema_string_min_length = null
+  }
+}
+
+variable "invite_message_template" {
+  type = object({
+    email_message = optional(string)
+    email_subject = optional(string)
+    sms_message   = optional(string)
+  })
+  nullable = true
+  default  = null
+}
