@@ -94,8 +94,10 @@ variable "string_attribute_constraints" {
     schema_string_max_length = optional(string)
     schema_string_min_length = optional(string)
   })
-  nullable = true
-  default  = null
+  default  = {
+    schema_string_max_length = null
+    schema_string_min_length = null
+  }
 }
 
 variable "invite_message_template" {
@@ -104,6 +106,9 @@ variable "invite_message_template" {
     email_subject = optional(string)
     sms_message   = optional(string)
   })
-  nullable = true
-  default  = null
+  default  = {
+    email_message = null
+    email_subject = null
+    sms_message = null
+  }
 }
