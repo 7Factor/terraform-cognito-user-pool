@@ -38,12 +38,9 @@ resource "aws_cognito_user_pool" "main_pool" {
     required            = true
     mutable             = var.schema_mutable
 
-    dynamic "string_attribute_constraints" {
-      for_each = var.string_attribute_constraints == null ? [] : [1]
-      content {
-        max_length = var.string_attribute_constraints.schema_string_max_length
-        min_length = var.string_attribute_constraints.schema_string_min_length
-      }
+    string_attribute_constraints {
+      max_length = var.string_attribute_constraints.schema_string_max_length
+      min_length = var.string_attribute_constraints.schema_string_min_length
     }
   }
 
