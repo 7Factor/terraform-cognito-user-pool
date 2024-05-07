@@ -90,18 +90,20 @@ variable "schema_mutable" {
 }
 
 variable "string_attribute_constraints" {
-  type = list(object({
+  type = object({
     schema_string_max_length = string
     schema_string_min_length = string
-  }))
-  default = []
+  })
+  nullable = true
+  default = null
 }
 
 variable "invite_message_template" {
-  type = list(object({
+  type = object({
     email_message = string
     email_subject = string
     sms_message   = string
-  }))
-  default = []
+  })
+  nullable = true
+  default = null
 }

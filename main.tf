@@ -23,11 +23,11 @@ resource "aws_cognito_user_pool" "main_pool" {
     allow_admin_create_user_only = var.allow_admin_create_user_only
 
     dynamic "invite_message_template" {
-      for_each = var.invite_message_template
+      for_each = var.invite_message_template == null ? [] : [1]
       content {
-        email_message = invite_message_template.value["email_message"]
-        email_subject = invite_message_template.value["email_subject"]
-        sms_message   = invite_message_template.value["sms_message"]
+        email_message = var.invite_message_template.email_message
+        email_subject = var.invite_message_template.email_subject
+        sms_message   = var.invite_message_template.sms_message
       }
     }
   }
@@ -39,10 +39,10 @@ resource "aws_cognito_user_pool" "main_pool" {
     mutable             = var.schema_mutable
 
     dynamic "string_attribute_constraints" {
-      for_each = var.string_attribute_constraints
+      for_each = var.string_attribute_constraints == null ? [] : [1]
       content {
-        max_length = string_attribute_constraints.value["schema_string_max_length"]
-        min_length = string_attribute_constraints.value["schema_string_min_length"]
+        max_length = var.string_attribute_constraints.schema_string_max_length
+        min_length = var.string_attribute_constraints.schema_string_min_length
       }
     }
   }
