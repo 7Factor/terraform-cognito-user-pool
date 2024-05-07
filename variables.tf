@@ -91,8 +91,8 @@ variable "schema_mutable" {
 
 variable "string_attribute_constraints" {
   type = object({
-    schema_string_max_length = string
-    schema_string_min_length = string
+    schema_string_max_length = optional(string)
+    schema_string_min_length = optional(string)
   })
   nullable = true
   default  = null
@@ -100,9 +100,9 @@ variable "string_attribute_constraints" {
 
 variable "invite_message_template" {
   type = object({
-    email_message = string
-    email_subject = string
-    sms_message   = string
+    email_message = optional(string)
+    email_subject = optional(string)
+    sms_message   = optional(string)
   })
   nullable = true
   default  = null
