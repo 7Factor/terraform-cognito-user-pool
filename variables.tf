@@ -95,7 +95,7 @@ variable "string_attribute_constraints" {
     schema_string_min_length = string
   })
   nullable = true
-  default = null
+  default  = null
 }
 
 variable "invite_message_template" {
@@ -105,5 +105,5 @@ variable "invite_message_template" {
     sms_message   = string
   })
   nullable = true
-  default = null
+  default  = null
 }
