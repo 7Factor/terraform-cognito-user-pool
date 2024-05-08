@@ -116,12 +116,14 @@ variable "recovery_mechanism" {
     priority = number
   }))
 
-  default = [{
-    name     = "verified_phone_number"
-    priority = 1
+  default = [
+    {
+      name     = "verified_phone_number"
+      priority = 1
     },
     {
       name     = "verified_email"
       priority = 2
-  }]
+    }
+  ]
 }
