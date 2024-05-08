@@ -117,7 +117,11 @@ variable "recovery_mechanism" {
   }))
 
   default = [{
-    name     = "admin_only"
+    name     = "verified_phone_number"
     priority = 1
+    },
+    {
+      name     = "verified_email"
+      priority = 2
   }]
 }
