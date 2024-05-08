@@ -44,6 +44,16 @@ resource "aws_cognito_user_pool" "main_pool" {
     }
   }
 
+  account_recovery_setting {
+    dynamic "recovery_mechanism" {
+      for_each = var.recovery_mechanism
+      content {
+        name = var.recovery_mechanism["name"]
+        priority = var.recovery_mechanism["priority"]
+      }
+    }
+  }
+
   # this guards against accidental deletion of user data until a way to restore backup is found
   lifecycle {
     prevent_destroy = true

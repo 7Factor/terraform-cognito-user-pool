@@ -109,3 +109,15 @@ variable "invite_message_template" {
   nullable = true
   default  = null
 }
+
+variable "recovery_mechanism" {
+  type = list(object({
+    name = string
+    priority = number
+  }))
+
+  default = [ {
+    name = "admin_only"
+    priority = 1
+  } ]
+}
