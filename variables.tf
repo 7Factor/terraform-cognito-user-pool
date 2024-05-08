@@ -112,12 +112,12 @@ variable "invite_message_template" {
 
 variable "recovery_mechanism" {
   type = list(object({
-    name = string
+    name     = string
     priority = number
   }))
 
-  default = [ {
-    name = "admin_only"
+  default = [{
+    name     = "admin_only"
     priority = 1
-  } ]
+  }]
 }
